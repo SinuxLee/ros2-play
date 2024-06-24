@@ -35,7 +35,7 @@ add_executable(publisher src/main.cpp)
 target_include_directories(publisher PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-ament_target_dependencies(publisher rclcpp)
+ament_target_dependencies(publisher rclcpp std_msgs)
 
 install(TARGETS
   publisher

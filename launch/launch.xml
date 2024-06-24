@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="subscribe" exec="subscriber" name="subscriber" output="screen" />
+  <node pkg="publish" exec="publisher" name="publisher" output="screen" prefix="cmd /c start cmd /k" />
+</launch>

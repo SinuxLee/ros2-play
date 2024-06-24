@@ -1,5 +1,5 @@
 
-## 安装 ROS2
+## Windows 安装 ROS2
 安装教程：https://ms-iot.github.io/ROSOnWindows/index.html
 ```powershell
 # install choco
@@ -18,6 +18,46 @@ ros2 run turtlesim turtlesim_node
 
 call C:\opt\ros\foxy\x64\local_setup.bat # 另一个窗口中运行
 ros2 run turtlesim turtle_teleop_key
+```
+
+## Ubuntu 安装 ROS2
+```shell
+sudo apt update && sudo apt install locales
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+```
+
+检查Universe源
+```shell
+apt-cache policy | grep universe
+# 如果没有执行以下命令
+sudo apt install software-properties-common
+sudo add-apt-repository universe
+```
+
+添加证书及仓库
+```shell
+sudo apt update && sudo apt install curl gnupg lsb-release
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+```
+
+安装及环境变量
+```shell
+sudo apt update && sudo apt upgrade
+sudo apt install ros-humble-desktop
+
+source /opt/ros/humble/setup.bash
+echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc 
+```
+
+测试
+```shell
+export ROS_DOMAIN_ID=42 # 跨设备通信需要设置这个变量
+ros2 run demo_nodes_cpp talker
+
+ros2 run demo_nodes_py listener
 ```
 
 ## 创建 c++ package
