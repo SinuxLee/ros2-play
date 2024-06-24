@@ -1,0 +1,4 @@
+{
+    "ros.distro": "foxy",
+    "cmake.ignoreCMakeListsMissing": true
+}
